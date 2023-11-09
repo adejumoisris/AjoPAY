@@ -1,13 +1,14 @@
 package com.AjoPay.AjoPay.controller;
 
+import com.AjoPay.AjoPay.dto.requestDto.TransferRequest;
 import com.AjoPay.AjoPay.dto.requestDto.UsersRequest;
-import com.AjoPay.AjoPay.dto.responseDto.UsersResponse;
+import com.AjoPay.AjoPay.dto.responseDto.AppResponse;
+import com.AjoPay.AjoPay.dto.responseDto.TransferResponse;
 import com.AjoPay.AjoPay.service.serviceInterface.UsersService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,7 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController {
     private final UsersService usersService;
     @PostMapping(path = "/users")
-    public UsersResponse createFreeAccount(@RequestBody  UsersRequest usersRequest ){
+    public AppResponse createFreeAccount(@RequestBody @Valid UsersRequest usersRequest ){
         return usersService.createFreeAccount(usersRequest);
     }
+
+    @PutMapping (path = "{id}/users")
+    public AppResponse updatedUserProfile(@PathVariable("id") Long id, @RequestBody UsersRequest request) {
+
+        return usersService.updatedUserProfile(id, request);
+    }
+
+    @PostMapping("transfer")
+    public TransferResponse transfer(@RequestBody TransferRequest request){
+        return usersService.transfer(request);
+    }
+
+    // reset password
 }
