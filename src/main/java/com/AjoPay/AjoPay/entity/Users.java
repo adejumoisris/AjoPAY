@@ -1,5 +1,6 @@
 package com.AjoPay.AjoPay.entity;
 
+import com.AjoPay.AjoPay.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,6 +20,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long Id;
+    private String userName;
     @Column(name = "firstName", length = 100)
     private String firstName;
     @Column(name = "lastName", length = 100)
@@ -29,8 +31,22 @@ public class Users {
     private String phoneNumber;
     @Column(name = "passWord", length = 100)
     private String passWord;
+    private String saltPassWord;
+    @Builder.Default
+
+    private Boolean isVerified = false;
     private String accountNumber;
-    private BigDecimal AccountBalance;
+    private BigDecimal accountBalance;
+
+    @OneToOne(mappedBy = "users")
+    private VerificationToken  verificationToken;
+
+    private int counter;
+
+    private String otp;
+    private Long otpCreatedAt;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     @OneToOne
     private CardDetails cardDetails;

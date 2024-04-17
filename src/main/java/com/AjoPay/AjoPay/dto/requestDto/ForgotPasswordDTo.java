@@ -1,17 +1,18 @@
-package com.AjoPay.AjoPay.dto.responseDto;
+package com.AjoPay.AjoPay.dto.requestDto;
 
-import com.AjoPay.AjoPay.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
-    private String firstName;
+@Builder
+public class ForgotPasswordDTo {
+    @Email
     private String email;
-    private UserStatus status;
+
 }

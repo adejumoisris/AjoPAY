@@ -1,5 +1,6 @@
 package com.AjoPay.AjoPay.controller;
 
+import com.AjoPay.AjoPay.dto.requestDto.CreditRequest;
 import com.AjoPay.AjoPay.dto.requestDto.TransferRequest;
 import com.AjoPay.AjoPay.dto.requestDto.UsersRequest;
 import com.AjoPay.AjoPay.dto.responseDto.AppResponse;
@@ -14,22 +15,31 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping(path = "/user")
 public class UsersController {
-    private final UsersService usersService;
-    @PostMapping(path = "/users")
+
+    public final UsersService usersService;
+    // Done Testing
+    @PostMapping(path = "/register")
     public AppResponse createFreeAccount(@RequestBody @Valid UsersRequest usersRequest ){
         return usersService.createFreeAccount(usersRequest);
     }
 
+    // Done testing
     @PutMapping (path = "{id}/users")
     public AppResponse updatedUserProfile(@PathVariable("id") Long id, @RequestBody UsersRequest request) {
 
         return usersService.updatedUserProfile(id, request);
     }
 
+    // Done testing
+
     @PostMapping("transfer")
     public TransferResponse transfer(@RequestBody TransferRequest request){
         return usersService.transfer(request);
     }
 
-    // reset password
+    @PostMapping("credit")
+    public TransferResponse CreditAccount (@RequestBody CreditRequest request){
+        return usersService.CreditAccount(request);
+
+    }
 }
