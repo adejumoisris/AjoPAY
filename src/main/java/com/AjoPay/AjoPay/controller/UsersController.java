@@ -18,12 +18,14 @@ public class UsersController {
 
     public final UsersService usersService;
     // Done Testing
+    @CrossOrigin
     @PostMapping(path = "/register")
     public AppResponse createFreeAccount(@RequestBody @Valid UsersRequest usersRequest ){
         return usersService.createFreeAccount(usersRequest);
     }
 
     // Done testing
+    @CrossOrigin
     @PutMapping (path = "{id}/users")
     public AppResponse updatedUserProfile(@PathVariable("id") Long id, @RequestBody UsersRequest request) {
 

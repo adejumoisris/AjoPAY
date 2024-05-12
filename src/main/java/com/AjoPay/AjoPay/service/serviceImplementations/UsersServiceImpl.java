@@ -69,7 +69,7 @@ public class UsersServiceImpl implements UsersService {
                 .email(usersRequest.getEmail())
                 .phoneNumber(usersRequest.getPhoneNumber())
                 .passWord((usersRequest.getPassWord()))
-                .saltPassWord(passwordEncoder.encode(usersRequest.getPassWord()))
+               // .saltPassWord(passwordEncoder.encode(usersRequest.getPassWord()))
                 .accountBalance(BigDecimal.ZERO)
                 // generating random AccountNumber
                 .accountNumber(AppUtils.generateAccountNumber())
